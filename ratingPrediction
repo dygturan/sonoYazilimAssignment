@@ -5,8 +5,9 @@
 #Subject: prediction of a user's rating which is greater than three on a movie 
 #Due Date: 28.08.2017
 #Dataset page: http://files.grouplens.org/datasets/movielens/ml-latest-small-README.html
+#Language: Python
 
-#The dataset should have same path as "project.py"
+#The dataset should have same path as your project.py 
 
 #I used first 1000 data instead of all dataset because it takes a long time. If you want to use all dataset, 
 #you should change some of variables
@@ -65,10 +66,10 @@ def calculateEuclideanDist(testPoint, trainPoint):
 #Then, it compares predictions and actual ratings and calculates accuracy of the model
 def calculateAccuracy(predictionsAndReality):
     trueCount = 0.0
-    for i in range(0,2000):
+    for i in range(0,200):
         if predictionsAndReality[i][0] == predictionsAndReality[i][1]:
             trueCount = trueCount+1.0
-    accuracy = trueCount/2000.0
+    accuracy = trueCount/200.0
     print('Accuracy of the model: ',accuracy)
 
 #This function gets test data and train data. It finds distances between train data and first test data by using
@@ -77,10 +78,10 @@ def calculateAccuracy(predictionsAndReality):
 #test data's this rating prediction and actual class in predictionsAndReality matrix. Finally, it does this operation 
 #for all test data and calculates accuracy for the given model by using predictionsAndReality matrix. 
 def knn(test, train, k):
-    predictionsAndReality = np.zeros((2000,2))
+    predictionsAndReality = np.zeros((200,2))
     i=0
     for currentTest in test:
-        distances = np.zeros((8000,2))
+        distances = np.zeros((800,2))
         j=0
         for currentTrain in train:
             #Find distances between train data and a test data by using the Euclidean distance
@@ -121,7 +122,7 @@ occupationColumns = ['name']
 occupations = pd.read_csv('ml-100k/u.occupation', sep='\t', names = occupationColumns, encoding='latin-1')
 
 #data counts
-ratingCount = 10000
+ratingCount = 1000
 userCount = 943
 movieCount = 1682
 
@@ -168,8 +169,8 @@ for i in range(0,ratingCount):
 np.random.shuffle(data)
 
 #Divide data as train and test
-train = data[:8000, :]
-test = data[8000:10000, :]
+train = data[:800, :]
+test = data[800:1000, :]
 
 #Classify data
 knn(test, train, k)
